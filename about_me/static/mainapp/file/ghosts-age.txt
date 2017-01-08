@@ -1,0 +1,16 @@
+def gen_fib(n):
+    l = [1,1]
+    while l[-1] < n:
+        l.append(l[-1]+l[-2])
+    return l
+def checkio(opacity):
+    fib = gen_fib(5000)
+    res = 0
+    proz = 10000
+    while opacity != proz:
+        res +=1
+        if res in fib:
+            proz -=res
+        else:
+            proz+=1
+    return res

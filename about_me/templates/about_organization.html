@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+Название : <b>{{organ.name}}</b>
+<br>
+Регион: {{organ.region}}
+<br>
+Сайт:<a href={{organ.url}} target="_blank" > {{organ.url}}</a>
+<br>
+Сфера деятельноси: {{organ.activity}}
+<br>
+{% endblock%}

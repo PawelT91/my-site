@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1 style="display:block;">Проекты</h1>
+<p>Здесь будут выложены мои прпимеры работ выполненных на языке Python</p>
+<h2 style="clear:both">Рабочие проекты</h2>
+<h5><a href="https://github.com/PawelT91/Work" target="_blank">Desktop приложение</a></h5>
+<p>Приложение предназначено для автоматизации перемещения файлов(маршрутных листов) между разными директориями. В нем используется библиотека Tk</p>
+<h5 >Этот Django проект </a></h5>
+<p>Ссылка будет выложена как только проект завершится</p>
+<h5 >Интернет магазин на Django </a></h5>
+<p>Ссылка будет выложена как только проект завершится</p>
+<h6>Задачи на графы</h6>
+{% for graf in  graf_place %}
+<div>
+    <a href=  {{ graf.url_text }} target="_blank">
+        <img src= "{{ graf.url_pi }}">
+    </a>
+    <a href= {{ graf.url_sov }}  target="_blank">Решение</a>
+</div>
+{% endfor%}
+
+<h6>Задачи на динамику</h6>
+{% for din in  din_place %}
+<div>
+    <a href=  {{ din.url_text }} target="_blank">
+        <img src= "{{ din.url_pi }}">
+    </a>
+    <a href= {{ din.url_sov }}  target="_blank">Решение</a>
+</div>
+{% endfor%}
+<h6>Другие интересные задачи</h6>
+{% for p in  place %}
+<div>
+    <a href=  {{ p.url_text }} target="_blank">
+        <img src= "{{ p.url_pi }}">
+    </a>
+    <a href= {{ p.url_sov }}  target="_blank">Решение</a>
+</div>
+{% endfor%}
+{% endblock%}

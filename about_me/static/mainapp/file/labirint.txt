@@ -1,0 +1,65 @@
+n = 12
+a = [[[[0]*n for i in range(n)] for i in range(n)] for i in range(n)]
+
+def add_edge(i1,j1,i2,j2,maze_map):
+    global a
+    if maze_map [i1][j1] == 0 and maze_map [i2][j2] == 0:
+        a[i1][j1][i2][j2] = 1
+        a[i2][j2][i1][j1] = 1
+    
+def fill_matrix(maze_map):
+    for i in range(1,11):
+        for j in range(1,11):
+            add_edge(i,j,i+1,j,maze_map)
+            add_edge(i,j,i-1,j,maze_map)
+            add_edge(i,j,i,j+1,maze_map)
+            add_edge(i,j,i,j-1,maze_map)
+
+def bfs(i,j):
+    global parent
+    dist = [[-1]*n for i in range(n)]
+    dist[i][j] = 0
+    s = [(i,j)]
+    while len(s) != 0:
+        v = s.pop(0)
+        for i2 in range(n):
+            for j2 in range(n):
+                if a[v[0]][v[1]][i2][j2] == 1 and dist[i2][j2] == -1:
+                    s.append((i2,j2))
+                    dist[i2][j2] = dist[v[0]][v[1]] + 1
+                    parent[i2][j2] = v
+
+
+def print_path(i,j):
+    global parent
+    if parent[i][j] != -1:
+        path = [(i,j)]
+        cur = parent[i][j]
+        while cur != -1:
+            path.append(cur)
+            cur = parent[cur[0]][cur[1]]
+        path.reverse()
+        #print(path)
+        res = ''
+        for index in range(len(path)-1):
+            cur = path[index]
+            next = path[index+1]
+            if next[0]>cur[0]:
+                res += 'S'
+            elif next[0]<cur[0]:
+                res += 'N'
+            elif next[1]>cur[1]:
+                res += 'E'
+            else:
+                res += 'W'
+        return res
+    
+def checkio(maze_map):
+    global a
+    a = [[[[0]*n for i in range(n)] for i in range(n)] for i in range(n)]
+    global visited
+    global parent
+    parent = [[-1]*n for i in range(n)]
+    fill_matrix(maze_map)
+    bfs(1,1)
+    return print_path(10,10)

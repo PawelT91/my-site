@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Главная страница</h1>
+    <h3>Всем привет, этой мой первый проект на Django </h3>
+         <div>
+             <div style='background-color:#FFD073; display:inline'>
+                 Курсы валют:
+                 <br>
+                 {% for r in res %}
+                 {{r}}<br>
+                 {% endfor %}
+             </div>
+             <p style="clear:both ">
+                 Рад всех приветствовать на моем первом ознакомительном сайте, сделанном на фреймворке Django.
+                 Данный сайт - резюме выполнен как учебный проект в рамнах образовательных курсов Geekbrains.
+             </p>
+
+         </div>
+{% endblock%}

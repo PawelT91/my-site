@@ -1,0 +1,38 @@
+def checkio(land_map):
+    visited = [[1]*len(land_map[0]) for n in range(len(land_map))]
+    res = []
+    s = 0
+    def dfs(land,l):
+        nonlocal s
+        s += 1
+        li = []
+        if land != len(land_map)-1:
+            li.append((land+1,l))
+        if l != len(land_map[0])-1:
+            li.append((land,l+1))
+        if land != 0:
+            li.append((land-1,l))
+        if l != 0:
+            li.append((land,l-1))
+        if (l != 0) and (land != 0):
+            li.append((land-1,l-1))
+        if (l != len(land_map[0])-1) and (land != len(land_map)-1):
+            li.append((land+1,l+1))
+        if (l != 0) and (land != len(land_map)-1):
+            li.append((land+1,l-1))
+        if (l != len(land_map[0])-1) and (land != 0):
+            li.append((land-1,l+1))
+        for l in li:
+            if visited[l[0]][l[1]]:
+                visited[l[0]][l[1]] = 0
+                if land_map[l[0]][l[1]]:
+                    dfs(l[0],l[1])
+    for land in range(len(land_map)):
+        for l in range(len(land_map[0])):
+            if visited[land][l]:
+                visited[land][l] = 0
+                if land_map[land][l]:
+                    s = 0
+                    dfs(land,l)
+                    res.append(s)
+    return sorted(res)

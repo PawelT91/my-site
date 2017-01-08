@@ -1,0 +1,20 @@
+ef prob(w,b,left):
+    global mas
+    if mas[w][b][left] != -1:
+        return mas[w][b][left]
+    if left == 1:
+        mas[w][b][left] = w/(w+b)
+    else:
+        mas[w][b][left] = 0
+        if w > 0:
+            mas[w][b][left] += w/(w+b)*prob(w-1,b+1,left-1)
+        if b > 0:
+            mas[w][b][left] += b/(w+b)*prob(w+1,b-1,left-1)
+    return mas[w][b][left]
+
+def checkio(marbles, step):
+    global mas
+    w = marbles.count('w')
+    b = marbles.count('b')
+    mas = [[[-1]*(step+1) for i in range(w+b+1)] for j in range(w+b+1)]
+    return prob(w,b,step)

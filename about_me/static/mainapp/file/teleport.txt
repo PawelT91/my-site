@@ -1,0 +1,16 @@
+def solve(cur,vis,edge,path):
+    if (len(vis)==8) and (cur == '1'):
+        return path
+    for e in edge:
+        if cur in e:
+            dst = e[0] if cur == e[1] else e[1]
+            new_vis = set(vis)
+            new_vis.add(dst)
+            new_edge = set(edge)
+            new_edge.remove(e)
+            p = solve(dst,new_vis,new_edge,path+dst)
+            if p != False:
+                return p
+    return False
+def checkio(teleports_string):
+    return solve('1',set(),set(teleports_string.split(',')),'1')

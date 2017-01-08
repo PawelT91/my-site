@@ -1,0 +1,22 @@
+def futc(dice_number, sides):
+    fer_one = [(1/sides)]*sides
+    if dice_number == 1:
+        return fer_one
+    else:
+        q = []
+        for f in futc(dice_number-1, sides):
+            r = []
+            for fer in fer_one:
+                r.append(fer*f)
+            q.append(r)
+        r = [0]*(len(q)+sides)
+        for i,n in enumerate(q):
+            for j,m in enumerate(n):
+                r[i+j+1]+=m
+        return(r)
+               
+def probability(dice_number, sides, target):
+    w = futc(dice_number, sides)
+    if target == 0 or target>len(w):
+        return 0
+    return w[target-1]

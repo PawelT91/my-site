@@ -1,0 +1,19 @@
+def capture(matrix):
+    infect = [0,]
+    time = 0
+    while len(set(infect)) != len(matrix):
+        time+=1
+        at = []
+        inf = []
+        for i in infect:
+            for n in range(len(matrix[0])):
+                if matrix[i][n] == 1:
+                    if (n not in infect) and (n not in at):
+                        if matrix[n][n] == 1:
+                            inf.append(n)
+                        else:
+                            if n not in at:
+                                matrix[n][n]-=1
+                                at.append(n)
+        infect.extend(inf)
+    return time

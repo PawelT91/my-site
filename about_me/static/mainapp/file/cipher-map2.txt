@@ -1,0 +1,20 @@
+def rotain_matrix(cipher_grille):
+    matrix = []
+    for i in range(len(cipher_grille)):
+        a = ''
+        for j in range(len(cipher_grille)):
+            a += cipher_grille[j][i]
+        matrix.append(a[::-1])
+    return list(matrix)
+    
+def recall_password(cipher_grille, ciphered_password):
+    res = ''
+    x = 0
+    while x < 4:
+        for i in range(len(cipher_grille)):
+            for j in range(len(cipher_grille)):
+                if cipher_grille[i][j] == 'X':
+                    res+= ciphered_password[i][j]
+        cipher_grille = rotain_matrix(cipher_grille) 
+        x+=1
+    return res

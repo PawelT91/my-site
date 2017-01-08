@@ -1,0 +1,34 @@
+import copy
+def res(wall):
+    result = 0
+    for w in wall:
+        res=(w[1]-w[0]+1)
+        result+=res
+    return result
+
+def s(w):
+    z = 1
+    while True:
+        for i,y in enumerate(w):
+            v1 = len(w)
+            print(v1,'v1')
+            r = copy.copy(w)
+            r.pop(i)
+            print(i,r,'RRRRR')
+            for j,x in enumerate(r):
+                print(y[1])
+                print(x)
+                if x[0] <= y[1] <= x[1]:
+                    w[i] = [min(x[0],y[0]), x[1]]
+                    w.remove(x)
+                    print('!!!',w)
+                    g = 1
+                else:
+                    g = 0
+            if g ==1:
+                break
+        v2 = len(w)
+        print(v2,'v2')
+        if v2 == v1:
+            break
+    return w

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block js %}
+    <script src="{% static '/mainapp/js/last_work.js' %}"></script>
+{% endblock %}
+{% block content %}
+<h1 style="display:block;">Места работы</h1>
+<span>
+        {%  csrf_token  %} <!-- НЕ СРАБАТЫВАЕТ-->
+       <!-- <input type="checkbox" name="last_works" value="" onclick="on_check(this)">Показать последние 3 места работы -->
+</span>
+{% for work in work_place %}
+<br>
+<div style="border:1px solid grey; padding-left: 10px;clear:both" >
+    <h5>Место работы :
+        <div id ='place_works'>
+            {% if work.organization.name == 'ТД Альфа комплект'  %}
+            <a href="{% url 'about_alfa' %}"> {{work.organization.name}}</a>
+            {% elif work.organization.name == 'НТЦ ЮРИОН'  %}
+            <a href="{% url 'about_urion' %}"> {{work.organization.name}}</a>
+            {% elif work.organization.name == 'ФГУП НПЦАП'  %}
+            <a href="{% url 'about_pil' %}"> {{work.organization.name}}</a>
+            {% elif work.organization.name == 'НПО МИР'  %}
+            <a href="{% url 'about_mir' %}"> {{work.organization.name}}</a>
+            {% endif %}
+        </div>
+    </h5>
+
+    <h6>Должность: {{work.D}}</h6>
+    <h6>Период : C {{work.time_st|date:"d"}} {{work.time_st|date:"E"}} {{work.time_st|date:"Y"}} по
+        {{work.time_end|date:"d"}} {{work.time_end|date:"E"}} {{work.time_end|date:"Y"}}</h6>
+    <p> <b>Сфера деятельности: </b>{{work.ob}}</p>
+</div>
+{%  endfor %}
+{% endblock%}

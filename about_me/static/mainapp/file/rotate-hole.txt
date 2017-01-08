@@ -1,0 +1,16 @@
+def rotate(state, pipe_numbers):
+    res = []
+    b = len(state)
+    n = 0 
+    while n != len(state):
+        ex = 0
+        for pipe in pipe_numbers:
+            if state[pipe] == 0:
+                break
+            if state[pipe] == 1:
+                ex+=1
+        if ex == len(pipe_numbers):
+            res.append(n)
+        state.insert(0,state.pop())
+        n+=1
+    return res

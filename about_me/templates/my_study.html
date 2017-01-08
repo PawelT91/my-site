@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Здесть представлены данные о моем образовании</h2>
+    <table>
+        <caption style="caption-side: top;font-size:20px;color: red;">Высшее образование</caption>
+        <tr>
+            <th style="border:solid #000; border-collapse:collapse;">Университет</th>
+            <th style="border:solid #000; border-collapse:collapse;">Специальнось</th>
+            <th style="border:solid #000; border-collapse:collapse;collapse;text-align:center">Тема выпускной работы</th>
+            <th style="border:solid #000; border-collapse:collapse;width: 180px;text-align:center">Период обучения</th>
+        </tr>
+        {% for st in st_place %}
+        <tr>
+            <td style="border:solid #000; border-collapse:collapse;"> <a href= {{st.url}} target="_blank"  >{{ st.name }}</a> </td>
+            <td style="border:solid #000; border-collapse:collapse;"> {{st.sp}}</td>
+            <td style="border:solid #000; border-collapse:collapse;"> {{st.dip}}</td>
+            <td style="border:solid #000; border-collapse:collapse;text-align:center"> C {{st.time_st|date:"d"}} {{st.time_st|date:"E"}} {{st.time_st|date:"Y"}} по
+        {{st.time_end|date:"d"}} {{st.time_end|date:"E"}} {{st.time_end|date:"Y"}} </td>
+        </tr>
+        {% endfor %}
+    </table>
+<br>
+<br>
+<table>
+    <caption style="caption-side: top;font-size:20px;color: blue;">Дополнительное Образование (Курсы)</caption>
+        <tr>
+            <th style="border:solid #000; border-collapse:collapse;">Организация</th>
+            <th style="border:solid #000; border-collapse:collapse;">Специализация</th>
+            <th style="border:solid #000; border-collapse:collapse;collapse;text-align:center">Год обучения</th>
+        </tr>
+        {% for curs in curs_place %}
+        <tr>
+            <td style="border:solid #000; border-collapse:collapse;"> {{ curs.org }}</td>
+            <td style="border:solid #000; border-collapse:collapse;"> <a href= {{curs.url}} target="_blank">{{curs.sp}}</a></td>
+            <td style="border:solid #000; border-collapse:collapse;collapse;text-align:center"> {{curs.Data}} </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock%}

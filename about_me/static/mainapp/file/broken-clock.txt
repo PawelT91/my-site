@@ -1,0 +1,44 @@
+def broken_clock(starting_time, wrong_time, error_description):
+    Delta_s = (int(wrong_time[:2])-int(starting_time[:2]))*3600 + (int(wrong_time[3:5])-int(starting_time[3:5]))*60 +(int(wrong_time[6:8])-int(starting_time[6:8]))
+    r = error_description.split()
+    if r[1] in ('second','seconds'):
+        z,s = r[0][0],int(r[0][1:])
+    if r[1] in ('minute','minutes'):
+        z,s = r[0][0],int(r[0][1:])*60
+    if r[1] in ('hour','hours'):
+        z,s = r[0][0],int(r[0][1:])*3600
+    if r[4] in ('second','seconds'):
+        x = int(r[3])
+    if r[4] in ('minute','minutes'):
+        x = int(r[3])*60
+    if r[4] in ('hour','hours'):
+        x = int(r[3])*3600
+    Del = (x*Delta_s)/eval('x'+z+'s') 
+    if Del >= 3600:
+        D_H = Del//3600
+        print(D_H,'D_H')
+        Del -=3600*D_H
+        print(Del,'Del')
+    else:
+        D_H = 0
+    if Del >= 60:
+        D_M = Del//60
+        Del -=60*D_M
+    else:
+        D_M = 0
+    D_H +=int(starting_time[:2])
+    D_M +=int(starting_time[3:5])
+    D_S = Del+int(starting_time[6:8])
+    if D_S>60:
+        D_M+=1
+        D_S-=60
+    if D_M>60:
+        D_H+=1
+        D_M-=60
+    D_S = int(D_S)
+    D_M = int(D_M)
+    D_H = int(D_H)    
+    D_H = '0'+str(D_H) if int(D_H) < 10 else str(D_H)
+    D_M = '0'+str(D_M) if int(D_M) < 10 else str(D_M)
+    D_S = '0'+str(D_S) if int(D_S) < 10 else str(D_S)
+    return D_H+':'+D_M+':'+D_S

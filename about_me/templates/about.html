@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+         <div>
+             <h3>{{name|title}} {{surmane|title}} {{middlename|title}}</h3>
+             <ul style="list-style:none">
+                 <li>
+                     Дата рождения: {{birhday|date:"E"}},{{birhday|date:"Y"}}
+                 </li>
+                 <li>
+                     Город проживания: {{city|title}}
+                 </li>
+                 <li>
+                     Место рождения: {{birhday_city|title}}
+                 </li>
+                 <li>
+                     Образование: {{educations}}
+                 </li>
+                 <li>
+                     Телефон: {{Phone}}
+                 </li>
+             </ul>
+         </div>
+<p>Я начинающий разработчик Python, в настоящее время осваиваю фреймфорк Django. Программирую на Си, Python и Verilog HDL,
+ранее занимался разработкой ПО для микроконтроллеров. Сейчас решил посмотреть на возможности языка Python и заняться углубленным его
+изучением.
+<p>
+{% if Hobby is True %}
+<h4>Хобби</h4>
+<div style="padding: 0; margin: 0 auto">
+    <ul style="list-style:none;margin: 0;padding: 0px;">
+        {% for H in Hob %}
+        <li style="display: inline ;margin-right: 2px; padding: 3px;float: left;" >
+            {{H.name}}
+            <div>
+                <img src={{H.url}}  width="160px" height="120px" style="float:left; margin-right:20px;">
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endblock%}
